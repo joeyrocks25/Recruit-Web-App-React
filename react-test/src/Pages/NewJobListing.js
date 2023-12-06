@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import axios from 'axios';
+import '../styles/NewJobListing.css';
 
 const NewJobListing = () => {
   const [title, setTitle] = useState('');
@@ -15,6 +16,9 @@ const NewJobListing = () => {
         return;
       }
 
+      // Post a new Job to SQL database
+      // requires userid
+      // goes to RecruitAppBackendSQLDB
       await axios.post('http://127.0.0.1:5001/joblistings', {
         CosmosDBUserID: user.id,
         Title: title,
@@ -24,90 +28,51 @@ const NewJobListing = () => {
         DislikesCount: 0,
       });
 
-      // Clear form fields after successful job posting
       setTitle('');
       setCompany('');
       setDescription('');
 
-      // Show a popup box with a success message
       alert('Job posted successfully!');
     } catch (error) {
       console.error('Error posting job listing:', error);
-      // Show a popup box with an error message
       alert(error.response ? error.response.data.message : 'An error occurred while posting the job listing.');
     }
   };
 
-  const containerStyle = {
-    maxWidth: '400px',
-    margin: '20px auto', // Adjusted top margin to move the form down
-    padding: '20px',
-    border: '1px solid #ccc',
-    borderRadius: '8px',
-    boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
-  };
-
-  const labelStyle = {
-    fontWeight: 'bold',
-    marginBottom: '8px',
-    display: 'block',
-  };
-
-  const inputStyle = {
-    width: '100%',
-    padding: '8px',
-    boxSizing: 'border-box',
-  };
-
-  const textareaStyle = {
-    width: '100%',
-    padding: '8px',
-    boxSizing: 'border-box',
-    minHeight: '100px', // Set a minimum height for the textarea
-  };
-
-  const buttonStyle = {
-    backgroundColor: '#4caf50',
-    color: 'white',
-    padding: '10px',
-    border: 'none',
-    cursor: 'pointer',
-  };
-
   return (
-    <div style={containerStyle}>
-      <h1 style={{ textAlign: 'center' }}>Welcome to Job Posting Page</h1>
-      <form style={{ display: 'grid', gap: '10px' }}>
-        <label htmlFor="title" style={labelStyle}>Job Title:</label>
+    <div className="container">
+      <h1 className="title">Welcome to Job Posting Page</h1>
+      <form className="form">
+        <label htmlFor="title" className="label">Job Title:</label>
         <input
           type="text"
           id="title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          style={inputStyle}
+          className="input"
         />
 
-        <label htmlFor="company" style={labelStyle}>Company:</label>
+        <label htmlFor="company" className="label">Company:</label>
         <input
           type="text"
           id="company"
           value={company}
           onChange={(e) => setCompany(e.target.value)}
-          style={inputStyle}
+          className="input"
         />
 
-        <label htmlFor="description" style={labelStyle}>Job Description:</label>
+        <label htmlFor="description" className="label">Job Description:</label>
         <textarea
           id="description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          style={textareaStyle}
+          className="textarea"
         />
 
         <button
           type="button"
           onClick={handlePostJobListing}
-          style={buttonStyle}
+          className="button"
         >
           Post Job Listing
         </button>

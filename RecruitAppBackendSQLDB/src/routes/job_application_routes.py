@@ -3,6 +3,7 @@ from flask import jsonify, Blueprint, request, current_app
 from src.models.job_application import db, JobApplication
 import logging
 
+
 job_applications_bp = Blueprint('job_applications', __name__)
 
 @job_applications_bp.route('/jobapplications', methods=['GET'])
@@ -29,7 +30,6 @@ def get_job_applications():
 def create_job_application():
     data = request.get_json()
 
-    # Check if a job application already exists for the given JobID and CosmosDBUserID
     existing_application = JobApplication.query.filter_by(
         JobID=data['JobID'],
         CosmosDBUserID=data['CosmosDBUserID']
@@ -37,24 +37,15 @@ def create_job_application():
 
     if existing_application:
         return jsonify({'message': 'Job application already exists for this user and job'}), 400
-
-    # Log the data before creating the new job application
-    logging.info(f"Creating job application with data: {data}")
-
+    
     with current_app.app_context():
         new_job_application = JobApplication(
             JobID=data['JobID'],
             CosmosDBUserID=data['CosmosDBUserID']
         )
 
-        # Log the new job application data before adding to the session
-        logging.debug(f"New job application data: {new_job_application.__dict__}")
-
         db.session.add(new_job_application)
         db.session.commit()
-
-        # Log a message after the job application is committed to the database
-        logging.info("Job application created successfully")
 
         return jsonify({'message': 'Job application created successfully'}), 201
 

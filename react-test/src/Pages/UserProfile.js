@@ -4,17 +4,21 @@ import { useAuth } from '../hooks/useAuth';
 import '../styles/UserProfile.css';
 
 const UserProfile = () => {
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
   const [imageSrc, setImageSrc] = useState(null);
 
   useEffect(() => {
     const fetchUserProfileImage = async () => {
       try {
+
+        // Retrieve our user and display their profile photo
+        // requires userid
+        // goes to CosmosDB and Azure blobs
         const userId = user.id;
         const apiUrl = `https://prod-04.uksouth.logic.azure.com:443/workflows/eee57e98e2974fe78e4576d5b2662762/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=nw56HtR2sYXhX_wdTuaH8gcnmBkMOYRyWF6bZQu_9_s&userId=${userId}`;
         
         // Initiate both requests simultaneously
-        const [response, imageResponse] = await Promise.all([
+        const [response] = await Promise.all([
           fetch(apiUrl),
           fetch(apiUrl, { method: 'HEAD' }) // HEAD request for image metadata
         ]);

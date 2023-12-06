@@ -8,14 +8,11 @@ job_listings_bp = Blueprint('job_listings', __name__)
 @job_listings_bp.route('/joblistings', methods=['GET'])
 def get_job_listings():
     with current_app.app_context():
-        # Check if the request contains a query parameter for CosmosDBUserID
         cosmos_db_user_id = request.args.get('CosmosDBUserID')
 
         if cosmos_db_user_id:
-            # If CosmosDBUserID is provided, filter job listings by it
             job_listings = JobListings.query.filter_by(CosmosDBUserID=cosmos_db_user_id).all()
         else:
-            # If no CosmosDBUserID is provided, get all job listings
             job_listings = JobListings.query.all()
 
         result = []
@@ -36,9 +33,6 @@ def get_job_listings():
 def create_job_listing():
     data = request.get_json()
 
-    # Log the data before creating the new job listing
-    logging.info(f"Creating job listing with data: {data}")
-
     with current_app.app_context():
         new_job_listing = JobListings(
             CosmosDBUserID=data['CosmosDBUserID'],
@@ -48,16 +42,9 @@ def create_job_listing():
             LikesCount=data.get('LikesCount', 0),
             DislikesCount=data.get('DislikesCount', 0),
         )
-
-        # Log the new job listing data before adding to the session
-        logging.debug(f"New job listing data: {new_job_listing.__dict__}")
-
+        
         db.session.add(new_job_listing)
         db.session.commit()
-
-        # Log a message after the job listing is committed to the database
-        logging.info("Job listing created successfully")
-
         return jsonify({'message': 'Job listing created successfully'}), 201
 
 @job_listings_bp.route('/joblistings/<int:job_listing_id>', methods=['PUT'])

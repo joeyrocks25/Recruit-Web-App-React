@@ -1,0 +1,102 @@
+/* MyJobs.css */
+
+.job-listings {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.job-box {
+  border: 1px solid #ccc;
+  margin: 10px;
+  padding: 15px;
+  cursor: pointer;
+  width: 200px;
+}
+
+.job-box.selected {
+  border-color: #007bff;
+}
+
+.job-title {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.job-company {
+  color: #555;
+  margin-bottom: 8px;
+}
+
+.job-description-preview {
+  margin-bottom: 15px;
+}
+
+.job-details {
+  margin-top: 10px;
+}
+
+.job-likes-dislikes {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  color: #007bff;
+}
+
+.job-likes,
+.job-dislikes {
+  font-size: 0.9rem;
+}
+
+.job-applicants {
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.see-more {
+  cursor: pointer;
+  color: #007bff;
+  text-decoration: underline;
+}
+
+/* Modal styles */
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  max-width: 400px;
+  width: 100%;
+}
+
+.modal-title {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.user-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.user-item {
+  padding: 8px;
+  margin-bottom: 8px;
+  border: 1px solid #ccc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.thumbs-up {
+  color: #28a745;
+}
+
+.thumbs-down {
+  color: #dc3545;
+}

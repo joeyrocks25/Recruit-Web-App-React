@@ -2,15 +2,16 @@
 from flask import Blueprint, jsonify, request, current_app
 import jwt
 from datetime import datetime, timedelta
-from flask_cors import CORS  # Import the CORS module
+from flask_cors import CORS
 
-
-# auth_bp = Blueprint("auth", __name__, url_prefix="/api/auth")
+# Create a Blueprint named "auth" with the URL prefix "/api/auth"
 bp = Blueprint("auth", __name__, url_prefix="/api/auth")
 
-# Enable CORS for the /api/users route
-CORS(bp, resources={r"/api/auth/*": {"origins": "*"}})
+# Enable CORS for the "auth" Blueprint with a wildcard for origins
+# CORS(bp, resources={r"/api/auth/*": {"origins": "*"}})
 
+# User login endpoint
+# Retrieves login data from the request, validates credentials, and returns a JWT token for authentication.
 @bp.route("/login", methods=["POST"])
 def login():
     try:
@@ -18,11 +19,9 @@ def login():
         username = login_data.get("username")
         password = login_data.get("password")
 
-        # Fetch user data from the Cosmos DB based on the username
         user = get_user_by_username(username)
 
         if user and user.get("password") == password:
-            # Generate JWT token with user details
             token = generate_jwt_token(user)
             return jsonify({"token": token})
 
@@ -30,6 +29,8 @@ def login():
     except Exception as e:
         return jsonify({"error": f"Failed to process login request: {str(e)}"}), 500
 
+
+# Function to get user information by username from Cosmos DB
 def get_user_by_username(username):
     with current_app.app_context():
         container = current_app.cosmos_db.get_container_client("UsersContainer")
@@ -40,11 +41,12 @@ def get_user_by_username(username):
         items = list(container.query_items(query, parameters=[{"name": "@username", "value": username}], enable_cross_partition_query=True))
         return items[0] if items else None
 
+
+# Function to generate a JWT token for user authentication
 def generate_jwt_token(user_data):
-    # Set the expiration time for the token (e.g., 1 hour)
+
     expiration_time = datetime.utcnow() + timedelta(hours=1)
     
-    # Include additional user details in the payload
     payload = {
         "email": user_data["email"],
         "filelocation": user_data["filelocation"],
@@ -54,12 +56,10 @@ def generate_jwt_token(user_data):
         "password": user_data["password"],
         "username": user_data["username"],
     }
-
-    # Create the JWT token
     token = jwt.encode(
         payload,
         current_app.config["SECRET_KEY"],
         algorithm="HS256"
     )
-    print(token)
     return token
+

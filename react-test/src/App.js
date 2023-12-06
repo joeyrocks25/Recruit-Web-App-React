@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Default from './Pages/Default';
 import Login from './Pages/Login';
 import Home from './Pages/Home';
-import MediaUpload from './Pages/MediaUpload';
 import UserProfile from './Pages/UserProfile';
 import Navbar from './routes/Navbar';
 import Register from './Pages/Register';
@@ -35,10 +34,6 @@ const App = () => {
         <Route
           path="/Home"
           element={renderProtectedRoute(<><Navbar /><Home /></>)}
-        />
-        <Route
-          path="/MediaUpload"
-          element={renderProtectedRoute(<><Navbar /><MediaUpload /></>)}
         />
         <Route
           path="/UserProfile"

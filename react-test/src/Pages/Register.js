@@ -1,7 +1,10 @@
+// RegisterForm.js
 import React, { useState } from 'react';
 import axios from 'axios';
 import Modal from 'react-modal';
 import { useNavigate } from 'react-router-dom';
+import '../styles/RegisterForm.css';
+
 
 // RegisterForm Component: Handles user registration
 const RegisterForm = () => {
@@ -23,15 +26,14 @@ const RegisterForm = () => {
   const [file, setFile] = useState(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  // Open the modal
+
   const openModal = () => setModalIsOpen(true);
-  // Close the modal and redirect to the login page
+
   const closeModal = () => {
     setModalIsOpen(false);
     navigate('/login');
   };
 
-  // Handle input change
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -73,7 +75,6 @@ const RegisterForm = () => {
 
       console.log('Successful Response:', response);
 
-      // Open the success modal
       openModal();
     } catch (error) {
       console.error('Error sending data:', error);
@@ -90,19 +91,9 @@ const RegisterForm = () => {
     }
   };
 
-  // Styling for the container
-  const containerStyle = {
-    maxWidth: '400px',
-    margin: '20px auto', // Adjusted top margin to move the form down
-    padding: '20px',
-    border: '1px solid #ccc',
-    borderRadius: '8px',
-    boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
-  };
-
   // JSX for the RegisterForm component
   return (
-    <div style={containerStyle}>
+    <div className="container"> 
       <h2>Register</h2>
       <form onSubmit={handleSubmit}>
         <label>
@@ -128,14 +119,13 @@ const RegisterForm = () => {
         <button type="submit">Submit</button>
       </form>
 
-      {/* Success modal */}
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         contentLabel="Registration Success"
         style={{
           content: {
-            width: '300px', // Set the width as per your requirement
+            width: '300px', 
             height: '200px',
             margin: 'auto',
           },
@@ -149,5 +139,5 @@ const RegisterForm = () => {
   );
 };
 
-// Export the RegisterForm component
+
 export default RegisterForm;

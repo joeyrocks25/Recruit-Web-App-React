@@ -1,0 +1,13 @@
+/* RegisterForm.css */
+
+/* Container styling */
+.container {
+  max-width: 400px;
+  margin: 20px auto; /* Adjusted top margin to move the form down */
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Additional styling as needed */

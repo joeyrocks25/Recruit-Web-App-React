@@ -6,13 +6,10 @@ import { useAuth } from '../hooks/useAuth';
 const DisplayResume = () => {
   const { user } = useAuth(); 
   const userId = user ? user.id : '';
-  console.log(userId)
 
-
+  // uri for our function for cosmosdb and azure blobs
   const functionUriGetFiles = 'https://functionappuserresumes.azurewebsites.net/api/HttpTriggerGetResume?code=3xBINMjx9M_ybw4gII-HTDCL5ejk46kuzkfwebsa1gMpAzFu5xSR0w==';
-  
-  
-  const functionUriGetTranscript = 'https://functionappuserresumes.azurewebsites.net/api/HttpTriggerGetResume?code=3xBINMjx9M_ybw4gII-HTDCL5ejk46kuzkfwebsa1gMpAzFu5xSR0w==';
+
 
   const [files, setFiles] = useState([]);
   const [transcript, setTranscript] = useState('');
@@ -20,9 +17,14 @@ const DisplayResume = () => {
   const [loadingTranscript, setLoadingTranscript] = useState(false);
   const [fetchTranscriptOnDemand, setFetchTranscriptOnDemand] = useState(false);
 
+
   useEffect(() => {
     const fetchFiles = async () => {
       try {
+
+        // Get our PDF, MP4 and MOV file from azure blobs and meta data from CosmosDB
+        // requires userid 
+        // goes to Function that then goes to CosmosDB and Azure blobs
         const response = await fetch(`${functionUriGetFiles}&userId=${userId}`);
         if (!response.ok) {
           throw new Error(`Error fetching files: ${response.statusText}`);
@@ -39,29 +41,28 @@ const DisplayResume = () => {
 
     const fetchTranscript = async () => {
       try {
-        setLoadingTranscript(true); // Show loading indicator when fetching transcript
-        const response = await fetch(`${functionUriGetTranscript}&userId=${userId}&gettranscript=true`);
+        setLoadingTranscript(true);
+
+        // Advanced feature - Gets audio/mov file from azure blobs, sends mov to speechtotext endpoint
+        // converts speech to text and then returns a transcript
+        // requires userid and bool
+        const response = await fetch(`${functionUriGetFiles}&userId=${userId}&gettranscript=true`);
         if (!response.ok) {
           throw new Error(`Error fetching transcript: ${response.statusText}`);
         }
 
         const data = await response.json();
-        console.log('Transcript Response:', data);
 
-        // Access nested properties in the transcript object
         const transcriptText = data.transcript?.DisplayText || '';
         setTranscript(transcriptText);
 
-        // Log the transcript variable
-        console.log('Transcript variable is:', transcriptText);
       } catch (error) {
         console.error('Error fetching transcript:', error.message);
       } finally {
-        setLoadingTranscript(false); // Hide loading indicator after fetching transcript
+        setLoadingTranscript(false); 
       }
     };
 
-    // Fetch transcript on demand when the button is clicked
     if (fetchTranscriptOnDemand) {
       fetchTranscript();
       setFetchTranscriptOnDemand(false);
@@ -120,7 +121,6 @@ const DisplayResume = () => {
 
           {file.fileType === 'audio/mov' && (
             <div>
-              {/* Display the transcript for audio/mov */}
               {!loadingTranscript && transcript && (
                 <div style={{ marginBottom: '10px' }}>
                   <h2>Transcript</h2>
@@ -128,7 +128,6 @@ const DisplayResume = () => {
                 </div>
               )}
 
-              {/* Display the audio player */}
               <div style={{ marginBottom: '10px' }}>
                 <audio controls>
                   <source src={`data:${getFileType(file.fileName)};base64,${file.content}`} type="audio/mpeg" />
@@ -136,12 +135,10 @@ const DisplayResume = () => {
                 </audio>
               </div>
 
-              {/* Button to fetch transcript on demand */}
               {!loadingTranscript && !transcript && (
                 <button onClick={() => setFetchTranscriptOnDemand(true)}>Fetch Transcript</button>
               )}
 
-              {/* Optionally display loading indicator when fetching transcript on demand */}
               {fetchTranscriptOnDemand && loadingTranscript && (
                 <div style={{ textAlign: 'center', marginTop: '10px' }}>
                   <FaSpinner size={20} className="loading-icon" />

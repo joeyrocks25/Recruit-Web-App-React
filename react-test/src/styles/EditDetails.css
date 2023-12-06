@@ -1,0 +1,65 @@
+.container {
+  max-width: 400px;
+  height: 650px;
+  margin: 20px auto 0;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: static;
+}
+
+.image-container {
+  text-align: center;
+  margin-bottom: 20px;
+  height: 150px;
+  overflow: hidden;
+  position: static;
+}
+
+.profile-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  position: static;
+}
+
+.label {
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.input {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  position: static;
+}
+
+.button {
+  flex: 1;
+  background-color: #4caf50;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.delete-button {
+  flex: 1;
+  background-color: #ff0000;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+}

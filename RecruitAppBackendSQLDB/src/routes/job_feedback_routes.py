@@ -10,10 +10,8 @@ def get_job_feedback():
         job_id = request.args.get('JobID')
         
         if job_id:
-            # If JobID is provided, filter job feedback by it
             job_feedback = JobFeedback.query.filter_by(JobID=job_id).all()
         else:
-            # If no JobID is provided, get all job feedback
             job_feedback = JobFeedback.query.all()
 
         result = []
@@ -32,25 +30,15 @@ def get_job_feedback():
 def create_job_feedback():
     data = request.get_json()
 
-    # Log the data before creating the new job feedback
-    logging.info(f"Creating job feedback with data: {data}")
-
     with current_app.app_context():
         new_job_feedback = JobFeedback(
             JobID=data['JobID'],
             CosmosDBUserID=data['CosmosDBUserID'],
             IsLiked=data['IsLiked']
         )
-
-        # Log the new job feedback data before adding to the session
-        logging.debug(f"New job feedback data: {new_job_feedback.__dict__}")
-
+        
         db.session.add(new_job_feedback)
         db.session.commit()
-
-        # Log a message after the job feedback is committed to the database
-        logging.info("Job feedback created successfully")
-
         return jsonify({'message': 'Job feedback created successfully'}), 201
 
 @job_feedback_bp.route('/jobfeedback/<int:job_feedback_id>', methods=['PUT'])

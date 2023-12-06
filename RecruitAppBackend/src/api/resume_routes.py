@@ -1,7 +1,7 @@
 # Import the required modules
 import logging
 from flask import Blueprint, jsonify, request, current_app
-from src.data.cosmosdb_resume import get_resumes, get_resume_by_id, create_resume, update_resume, delete_resumes_by_user_id
+from src.data.cosmosdb_resume import get_resumes, create_resume, update_resume, delete_resumes_by_user_id
 
 # Create a Blueprint for the resumes
 bp = Blueprint("resume", __name__, url_prefix="/api/resumes")
@@ -10,27 +10,14 @@ bp = Blueprint("resume", __name__, url_prefix="/api/resumes")
 @bp.route("/", methods=["GET", "POST", "DELETE"])
 def handle_resumes():
     if request.method == "GET":
-        # Log the user ID being searched
         user_id = request.args.get("user_id")
-        logging.info(f"Searching for resumes with user ID: {user_id}")
-
         resumes = get_resumes(current_app, user_id=user_id)
-        
-        # Log all user IDs in the retrieved resumes
-        all_user_ids = [resume.get("UserID", "") for resume in resumes]
-        logging.info(f"All user IDs in the retrieved resumes: {all_user_ids}")
-
         return jsonify(resumes)
     elif request.method == "POST":
         new_resume_data = request.get_json()
-        logging.info(f"Received data: {new_resume_data}")
-
-        # Get the container dynamically based on the app context
         container = current_app.cosmos_db.get_container_client("ResumesContainer")
-
-        # Pass user_id as an argument to create_resume
         response = create_resume(container, new_resume_data["UserID"], new_resume_data)
-
+        
         if response:
             return jsonify({"message": "Resume created successfully"})
         else:
@@ -48,6 +35,7 @@ def handle_resumes():
 def handle_update_resume(user_id):
     updated_data = request.get_json()
     response = update_resume(current_app, user_id, updated_data)
+    
     if response:
         return jsonify({"message": "Resume updated successfully"})
     else:

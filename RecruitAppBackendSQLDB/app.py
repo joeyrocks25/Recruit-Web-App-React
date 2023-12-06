@@ -14,7 +14,7 @@ app.config.from_pyfile('config.py')
 db.init_app(app)
 CORS(app)
 
-# Register blueprints
+# Register API routes
 app.register_blueprint(job_applications_bp)
 app.register_blueprint(job_listings_bp)
 app.register_blueprint(job_feedback_bp)
