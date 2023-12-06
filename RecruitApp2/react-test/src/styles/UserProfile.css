@@ -1,0 +1,52 @@
+/* styles/UserProfile.css */
+
+.user-profile-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+.profile-image-container {
+  height: 150px;
+  width: 150px; /* Adjust the width to your preference */
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto; /* Center the profile image */
+  margin-bottom: 20px;
+}
+
+.profile-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.profile-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-links a {
+  margin-bottom: 10px;
+  color: #333;
+  text-decoration: none;
+}
+
+.logout-button {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #ff0000;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
