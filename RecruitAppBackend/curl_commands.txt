@@ -1,0 +1,83 @@
+run through each of these at the end to test responses
+
+
+*********** users ***************
+Get all users:
+curl -X GET http://127.0.0.1:5000/api/users/
+
+update users:
+curl -X PUT -H "Content-Type: application/json" -d "{\"Password\": \"newpassword123\", \"Email\": \"newemail2003@example.com\", \"ProfileImageURL\": \"https://example.com/newimage.jpg\"}" http://127.0.0.1:5000/api/users/07803d8c-9c35-426f-a79c-324a5bd075a6
+
+create new user:
+curl -X POST -H "Content-Type: application/json" -d "{\"Username\": \"user3\", \"Password\": \"password3\", \"Email\": \"user2002@example.com\", \"ProfileImageURL\": \"https://example.com/user3.jpg\", \"CreatedAt\": \"2023-11-21T12:00:00.000Z\"}" http://127.0.0.1:5000/api/users/
+
+delete user by userid:
+curl -X DELETE http://127.0.0.1:5000/api/users/f7354307-0dc9-4d6a-8cdc-07537b7c7e31 
+
+Get user by id:
+curl -X GET http://127.0.0.1:5000/api/users/84affdac-fae5-4dce-bcd8-800d6ae47a94
+
+
+
+*********** Resumes *************
+Get all resumes:
+curl -X GET http://localhost:5000/api/resumes/
+
+Get resume by userid:
+curl -X GET "http://localhost:5000/api/resumes/?user_id=qweqwewqed-9c35-426f-a79c-324a5bd075a6
+
+create new resume:
+curl -X POST -H "Content-Type: application/json" -d "{\"UserID\": \"06a96ca3-d629-498f-9845-37bd8d8eca45\", \"ResumeContentURL\": \"resume_url\", \"CreatedAt\": \"2023-11-21T12:00:00.000Z\"}" http://localhost:5000/api/resumes/"
+
+update resume:
+curl -X PUT -H "Content-Type: application/json" -d "{\"ResumeContentURL\": \"new_value\"}" "http://localhost:5000/api/resumes/qweqwewqed-9c35-426f-a79c-324a5bd075a6" (you can add whatever field you want to update)
+
+delete resume by userid:
+curl -X DELETE "http://localhost:5000/api/resumes/?user_id=qweqwewqed-9c35-426f-a79c-324a5bd075a6"
+
+
+
+********** job listings ********************
+
+create a new job listing: (make sure to default 0,0)
+curl -X POST -H "Content-Type: application/json" -d "{\"Title\": \"Your Job Title\", \"Description\": \"Your job description\", \"LikesCount\": 0, \"DislikesCount\": 0, \"CreatedAt\": \"2023-11-21T12:00:00Z\"}" "http://localhost:5000/api/job-listings/?user_id=123"
+
+View all job listings:
+curl -X GET http://localhost:5000/api/job-listings/
+
+get job listings by userid:
+curl -X GET "http://localhost:5000/api/job-listings/?user_id=123
+
+delete job listings by userid/jobid:
+curl -X DELETE "http://localhost:5000/api/job-listings/123/e2ac7bf7-f133-45cd-ad3d-57bdf7c999dc"
+
+update job listing by userid/jobid:
+curl -X PUT -H "Content-Type: application/json" -d "{\"Description\": \"123\"}" "http://localhost:5000/api/job-listings/123/e2ac7bf7-f133-45cd-ad3d-57bdf7c999dc"
+
+
+****************
+To do LikesDislikes:
+
+
+
+-- server admin login
+mackin153
+Liverpoollfc123
+
+
+logic apps (cosmosdb and azure blobs):
+
+get user/profile photo
+curl -X GET "https://prod-04.uksouth.logic.azure.com:443/workflows/eee57e98e2974fe78e4576d5b2662762/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=nw56HtR2sYXhX_wdTuaH8gcnmBkMOYRyWF6bZQu_9_s&userId=JTJmdXNlcnByb2ZpbGVzY29udGFpbmVyJTJmNjM4MzY5OTM3NDA5MjkzNTE1"
+
+
+update user+photo
+curl -X PUT "https://prod-20.uksouth.logic.azure.com:443/workflows/0e23308e2b0b4e77b26e5a3d61d4769d/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=zNcqjD5P-WAV1RaFEAjgKGGV4ItXZMxrMq_edIxJSYU&id=JTJmdXNlcnByb2ZpbGVzY29udGFpbmVyJTJmNjM4MzcwMzc1MTEzMTQ0Mjkx&username=kp123&email=test@gmail.com&password=newpassword"
+
+
+delete user+photo
+curl -X DELETE "https://prod-31.uksouth.logic.azure.com:443/workflows/5b88b393a3834cb086b4823bb0ba9ffd/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=nVQJA1E9yVXaJKTuJ8k9ziV3hS0xHy6E9DMwPhqmPpI&id=JTJmdXNlcnByb2ZpbGVzY29udGFpbmVyJTJmNjM4MzcwMzUyNjk2MDMwMDUw&filepath=/userprofilescontainer/638370352696030050"
+
+
+post 
+https://prod-05.uksouth.logic.azure.com:443/workflows/5e4c364ae4644ee49c285f8aa5a819c5/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=rhsJCcaNO7LNYR1kgYUSbgop1XpTbfbAG3hpgR0azvQ
