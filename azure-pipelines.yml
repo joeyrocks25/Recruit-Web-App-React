@@ -21,7 +21,7 @@ steps:
     displayName: "Install Node.js"
 
   - script: |
-      pushd $(uiSource)
+      pushd $(uiSource1)
       npm install
       npm run build
       popd
