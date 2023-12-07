@@ -14,8 +14,6 @@ import { useAuth } from './hooks/useAuth';
 import EditDetails from './Pages/EditDetails';
 import MyJobs from './Pages/MyJobs'
 
-
-
 const App = () => {
   console.log('Rendering App component.');
 
