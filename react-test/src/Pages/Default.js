@@ -7,7 +7,7 @@ const Default = () => {
   return (
     <div className="default-container">
       <header>
-        <h1>Welcome to RecruiterRRRRRRRR</h1>
+        <h1>Welcome to Recruiter</h1>
         <nav>
           <ul>
             <li><Link to="/login">Sign In</Link></li>
@@ -17,7 +17,7 @@ const Default = () => {
       </header>
       <main>
         <section>
-          <h2>About Recruiter</h2>
+          <h2>About Recruiter (TEST) </h2>
           <p>
             Recruiter is a platform for sharing and exploring media content. Sign in to start your journey!
           </p>
