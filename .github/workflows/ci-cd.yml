@@ -15,20 +15,31 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+        with:
+          submodules: recursive
 
+      - name: Debug Workflow
+        run: |
+          echo "Current Directory: $(pwd)"
+          echo "Repository Contents: $(ls -la)"
 
       - name: Use Node.js 16 for React App
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v3
         with:
-          node-version: "18.16.1"
+          node-version: 16
 
-      - name: Build and Deploy React App
-        working-directory: react-test
+      - name: Change to React App Directory
         run: |
           cd react-test
+          echo "Changed to react-test directory"
+          echo "Current Directory: $(pwd)"
+
+      - name: Build and Deploy React App
+        run: |
           npm install
           npm run build
           # Add deployment commands if applicable (e.g., deploy to hosting service)
+
       # - name: Build and Deploy Flask Backend
       #   working-directory: RecruitAppBackend
       #   run: |
