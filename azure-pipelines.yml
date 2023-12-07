@@ -27,6 +27,16 @@ steps:
       popd
     displayName: "Build UI"
 
+  - script: |
+      # Log the contents of the build directory
+      echo "Contents of $(uiBuild):"
+      ls -R $(uiBuild)
+
+      # Log the contents of the staging directory
+      echo "Contents of $(Build.ArtifactStagingDirectory):"
+      ls -R $(Build.ArtifactStagingDirectory)
+    displayName: "Log Directory Contents"
+
   - task: ArchiveFiles@2
     displayName: Archive
     inputs:
