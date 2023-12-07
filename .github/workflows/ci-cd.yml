@@ -36,9 +36,12 @@ jobs:
 
       - name: Build and Deploy React App
         run: |
+          cd $GITHUB_WORKSPACE/react-test
+          ls -la  # Print directory contents for debugging purposes
           npm install
           npm run build
           # Add deployment commands if applicable (e.g., deploy to hosting service)
+
 
       # - name: Build and Deploy Flask Backend
       #   working-directory: RecruitAppBackend
