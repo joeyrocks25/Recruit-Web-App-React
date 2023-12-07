@@ -34,6 +34,11 @@ jobs:
           echo "Changed to react-test directory"
           echo "Current Directory: $(pwd)"
 
+      - name: Set Permissions
+        run: |
+          chmod -R 755 node_modules
+          chmod +x node_modules/.bin/react-scripts
+
       - name: Build and Deploy React App
         run: |
           cd $GITHUB_WORKSPACE/react-test
