@@ -42,5 +42,5 @@ steps:
 
     # Serve the built application on localhost and port 3000
     echo "Serving the built application..."
-    serve -s build -l tcp://localhost:3000
+    serve -s build -l tcp://0.0.0.0:3000
   displayName: 'npm install, build, and serve'
