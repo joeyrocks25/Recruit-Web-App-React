@@ -46,6 +46,9 @@ steps:
   displayName: 'npm install, build, and serve'
 
 - script: |
+    # Wait for a few seconds to allow serve to start
+    sleep 10
+
     # Display the contents of the serve log for troubleshooting
     echo "Contents of serve.log:"
     cat serve.log
