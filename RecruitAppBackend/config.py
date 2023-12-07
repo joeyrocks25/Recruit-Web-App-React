@@ -8,5 +8,4 @@ class Config:
     COSMOSDB_DBNAME = "RecruitmentAppDB"
   
     # Flask configuration
-    DEBUG = False
     SECRET_KEY = secrets.token_hex(16)

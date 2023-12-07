@@ -20,6 +20,6 @@ app.register_blueprint(user_routes.bp)
 app.register_blueprint(resume_routes.bp)
 app.register_blueprint(job_routes.bp)
 
-
+# If running in a production environment, use Gunicorn as the server
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
