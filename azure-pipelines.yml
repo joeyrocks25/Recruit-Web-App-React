@@ -43,6 +43,8 @@ steps:
     # Serve the built application in the background using 'nohup'
     echo "Serving the built application in the background..."
     nohup serve -s build > serve.log 2>&1 &
+    serve_pid=$!
+    echo "Serve process ID: $serve_pid"
   displayName: 'npm install, build, and serve'
 
 - script: |
@@ -52,4 +54,8 @@ steps:
     # Display the contents of the serve log for troubleshooting
     echo "Contents of serve.log:"
     cat serve.log
-  displayName: 'Display serve log'
+
+    # Display the running processes to check if serve is still running
+    echo "Running processes:"
+    ps aux
+  displayName: 'Display serve log and processes'
