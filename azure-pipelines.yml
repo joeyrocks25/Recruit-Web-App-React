@@ -40,7 +40,13 @@ steps:
     echo "Installing serve globally..."
     npm install -g serve
 
-    # Serve the built application
-    echo "Serving the built application..."
-    serve -s build
+    # Serve the built application in the background using 'nohup'
+    echo "Serving the built application in the background..."
+    nohup serve -s build > serve.log 2>&1 &
   displayName: 'npm install, build, and serve'
+
+- script: |
+    # Display the contents of the serve log for troubleshooting
+    echo "Contents of serve.log:"
+    cat serve.log
+  displayName: 'Display serve log'
