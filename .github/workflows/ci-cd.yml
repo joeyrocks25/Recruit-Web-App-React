@@ -5,6 +5,9 @@ on:
     branches:
       - main
 
+env:
+  ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
+
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
@@ -27,16 +30,15 @@ jobs:
           npm install
           npm run build
           # Add deployment commands if applicable (e.g., deploy to hosting service)
+      # - name: Build and Deploy Flask Backend
+      #   working-directory: RecruitAppBackend
+      #   run: |
+      #     cd RecruitAppBackend
+      #     python -m pip install --upgrade pip
+      #     pip install -r requirements.txt
+      #     # Add any additional setup or deployment commands
 
-      - name: Build and Deploy Flask Backend
-        working-directory: RecruitAppBackend
-        run: |
-          cd RecruitAppBackend
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          # Add any additional setup or deployment commands
-
-      - name: Deploy to Azure (if applicable)
-        working-directory: RecruitAppBackend
-        run: |
-          # Add Azure deployment commands here
+      # - name: Deploy to Azure (if applicable)
+      #   working-directory: RecruitAppBackend
+      #   run: |
+      #     # Add Azure deployment commands here
