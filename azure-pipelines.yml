@@ -26,9 +26,10 @@ steps:
     npm install
     npm run build
 
-    # Install serve globally
-    npm install -g serve
+    # Install a version of serve that is compatible with Node.js 10
+    npm install -g serve@11
 
     # Serve the built application
     serve -s build
   displayName: 'npm install, build, and serve'
+
