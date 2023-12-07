@@ -22,14 +22,19 @@ steps:
     # Log current working directory
     echo "Current working directory: $(pwd)"
 
-    # Install dependencies and build
+    # Install Node.js dependencies
+    echo "Installing Node.js dependencies..."
     npm install
+
+    # Build the React application
+    echo "Building the React application..."
     npm run build
 
     # Install a version of serve that is compatible with Node.js 10
-    npm install -g serve@11
+    echo "Installing serve globally..."
+    npm install -g serve
 
     # Serve the built application
+    echo "Serving the built application..."
     serve -s build
   displayName: 'npm install, build, and serve'
-
