@@ -7,7 +7,7 @@ const Default = () => {
   return (
     <div className="default-container">
       <header>
-        <h1>Welcome to Recruiter</h1>
+        <h1>Welcome to RecruiterRRRRRRRR</h1>
         <nav>
           <ul>
             <li><Link to="/login">Sign In</Link></li>
