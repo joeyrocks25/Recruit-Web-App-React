@@ -34,28 +34,13 @@ steps:
 
     # Build the React application
     echo "Building the React application..."
-    npm run build
+    npm start
 
-    # Install a version of serve that is compatible with Node.js 10
-    echo "Installing serve globally..."
-    npm install -g serve
+    # # Install a version of serve that is compatible with Node.js 10
+    # echo "Installing serve globally..."
+    # npm install -g serve
 
-    # Serve the built application in the background using 'nohup'
-    echo "Serving the built application in the background..."
-    nohup serve -s build > serve.log 2>&1 &
-    serve_pid=$!
-    echo "Serve process ID: $serve_pid"
+    # # Serve the built application
+    # echo "Serving the built application..."
+    # serve -s build
   displayName: 'npm install, build, and serve'
-
-- script: |
-    # Wait for a few seconds to allow serve to start
-    sleep 10
-
-    # Display the contents of the serve log for troubleshooting
-    echo "Contents of serve.log:"
-    cat serve.log
-
-    # Display the running processes to check if serve is still running
-    echo "Running processes:"
-    ps aux
-  displayName: 'Display serve log and processes'
