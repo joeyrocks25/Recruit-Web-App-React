@@ -12,7 +12,7 @@ pool:
 steps:
 - task: NodeTool@0
   inputs:
-    versionSpec: '14'
+    versionSpec: '10.x'
   displayName: 'Install Node.js'
 
 - script: |
@@ -25,4 +25,10 @@ steps:
     # Install dependencies and build
     npm install
     npm run build
-  displayName: 'npm install and build'
+
+    # Install serve globally
+    npm install -g serve
+
+    # Serve the built application
+    serve -s build
+  displayName: 'npm install, build, and serve'
