@@ -11,7 +11,7 @@ variables:
   uiBuild: "$(uiSource)/build"
 
 pool:
-  vmthumbnail: ../"ubuntu-latest"
+  vmImage: ubuntu-latest
 
 steps:
   - task: NodeTool@0
