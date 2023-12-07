@@ -8,7 +8,7 @@ trigger:
 
 variables:
   uiSource1: "react-test"
-  # uiSource: "src/ui"
+  uiSource: "$(uiSource1)/src/ui"
   uiBuild: "$(uiSource)/build"
 
 pool:
