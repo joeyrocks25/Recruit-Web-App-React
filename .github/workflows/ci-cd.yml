@@ -1,0 +1,35 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Build and Deploy React App
+        working-directory: react-test
+        run: |
+          cd react-test
+          npm install
+          npm run build
+          # Add deployment commands if applicable (e.g., deploy to hosting service)
+
+      - name: Build and Deploy Flask Backend
+        working-directory: RecruitAppBackend
+        run: |
+          cd RecruitAppBackend
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          # Add any additional setup or deployment commands
+
+      - name: Deploy to Azure (if applicable)
+        working-directory: RecruitAppBackend
+        run: |
+          # Add Azure deployment commands here
