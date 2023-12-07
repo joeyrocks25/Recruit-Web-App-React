@@ -7,7 +7,7 @@ trigger:
   - main
 
 variables:
-  uiSource: "src/ui"
+  uiSource: "src"
   uiBuild: "$(uiSource)/build"
 
 pool:
