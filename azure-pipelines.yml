@@ -22,9 +22,15 @@ steps:
     # Log current working directory
     echo "Current working directory: $(pwd)"
 
-    # Install Node.js dependencies
-    echo "Installing Node.js dependencies..."
-    npm install
+    # Print the content of package.json and package-lock.json
+    echo "Contents of package.json:"
+    cat package.json
+    echo "Contents of package-lock.json:"
+    cat package-lock.json
+
+    # Install Node.js dependencies using 'npm ci'
+    echo "Installing Node.js dependencies using 'npm ci'..."
+    npm ci
 
     # Build the React application
     echo "Building the React application..."
