@@ -34,13 +34,13 @@ steps:
 
     # Build the React application
     echo "Building the React application..."
-    npm start
+    npm run build
 
-    # # Install a version of serve that is compatible with Node.js 10
-    # echo "Installing serve globally..."
-    # npm install -g serve
+    # Install a version of serve that is compatible with Node.js 10
+    echo "Installing serve globally..."
+    npm install -g serve
 
-    # # Serve the built application
-    # echo "Serving the built application..."
-    # serve -s build
+    # Serve the built application on IP 192.168.1.130 and port 3000
+    echo "Serving the built application..."
+    serve -s build -l 192.168.1.130:3000
   displayName: 'npm install, build, and serve'
