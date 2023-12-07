@@ -16,6 +16,13 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
+    # Change directory to react-test
+    cd react-test
+
+    # Log current working directory
+    echo "Current working directory: $(pwd)"
+
+    # Install dependencies and build
     npm install
     npm run build
   displayName: 'npm install and build'
