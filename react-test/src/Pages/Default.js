@@ -17,7 +17,7 @@ const Default = () => {
       </header>
       <main>
         <section>
-          <h2>About Recruiter </h2>
+          <h2>About Recruiter(TEST) </h2>
           <p>
             Recruiter is a platform for sharing and exploring media content. Sign in to start your journey!
           </p>
