@@ -9,7 +9,7 @@ trigger:
 variables:
   uiSource1: "react-test"
   uiSource: "$(uiSource1)/src/ui"
-  uiBuild: "$(uiSource)/build"
+  uiBuild: "$(uiSource1)/build"
 
 pool:
   vmImage: ubuntu-latest
@@ -17,7 +17,7 @@ pool:
 steps:
   - task: NodeTool@0
     inputs:
-      versionSpec: "10.x"
+      versionSpec: "v18.16.0"
     displayName: "Install Node.js"
 
   - script: |
