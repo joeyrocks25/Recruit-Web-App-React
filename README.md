@@ -28,6 +28,10 @@ This project is a recruitment website designed to provide a secure and interacti
   - Post job listings
   - Manage job listings
   - View likes and track applications
+ 
+- **Data storage**:
+  - SQL database
+  - NoSql database - blob storage, CosmosDB
 
 - **Scalable Cloud Infrastructure**:
   - Deployed on Azure, demonstrating scalability (resources have since been spun down)
