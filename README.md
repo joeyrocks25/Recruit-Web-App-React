@@ -1,0 +1,1 @@
+This project is a React web application designed to showcase a cloud-native solution. The majority of the infrastructure is deployed in the cloud. This web app enables the demonstration of features and scalability.
